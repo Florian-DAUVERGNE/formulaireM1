@@ -11,7 +11,7 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto) {
     if (
       !this.isSHA256(createUserDto.password) ||
       !this.isSHA256(createUserDto.username)
@@ -22,14 +22,17 @@ export class UserService {
     }
 
     const existingUser = await this.findByUsername(createUserDto.username);
+
     if (existingUser) {
-      throw new BadRequestException('Cet utilisateur existe déjà');
+      return { message: 'Cet utilisateur existe déjà' };
     }
 
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
 
     const createdUser = new this.userModel(createUserDto);
-    return createdUser.save();
+    if (createdUser.save()) {
+      return { message: 'Utilisateur créé avec succés' };
+    }
   }
 
   async findAll(): Promise<User[]> {

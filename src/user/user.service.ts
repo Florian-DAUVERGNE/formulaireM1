@@ -3,6 +3,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './user.model';
 import { CreateUserDto } from './user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -24,6 +25,8 @@ export class UserService {
     if (existingUser) {
       throw new BadRequestException('Cet utilisateur existe déjà');
     }
+
+    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
 
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();

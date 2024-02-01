@@ -20,6 +20,11 @@ export class UserService {
       );
     }
 
+    const existingUser = await this.findByUsername(createUserDto.username);
+    if (existingUser) {
+      throw new BadRequestException('Cet utilisateur existe déjà');
+    }
+
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }

@@ -10,10 +10,8 @@ export class AuthService {
     const user = await this.userService.findByUsername(username);
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      const { password, ...result } = user;
-
-      return result;
+      return { message: 'Connexion réussie' };
     }
-    return null;
+    return { message: "Nom d'utilisateur ou mot de passe incorrect" };
   }
 }

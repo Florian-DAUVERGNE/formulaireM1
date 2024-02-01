@@ -1,17 +1,25 @@
-// user.service.ts
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from './user.model';
+import { CreateUserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
-  private users = [
-    {
-      userId: 1,
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-    },
-  ];
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<User>,
+  ) {}
 
-  async findByUsername(username: string): Promise<any> {
-    return this.users.find((user) => user.username == username);
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const createdUser = new this.userModel(createUserDto);
+    return createdUser.save();
+  }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
+
+  async findByUsername(username: string) {
+    return this.userModel.findOne({ username }).exec();
   }
 }

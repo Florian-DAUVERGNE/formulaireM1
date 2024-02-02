@@ -9,7 +9,10 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.userService.findByUsername(username);
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (
+      user &&
+      (await bcrypt.compare(password, user.LzRJR6wYlOLQAmBxpBxwqhGbnKIMfjO8))
+    ) {
       return { message: 'Connexion réussie' };
     }
     return { message: "Nom d'utilisateur ou mot de passe incorrect" };

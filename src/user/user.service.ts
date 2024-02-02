@@ -13,21 +13,26 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     if (
-      !this.isSHA256(createUserDto.password) ||
-      !this.isSHA256(createUserDto.username)
+      !this.isSHA256(createUserDto.LzRJR6wYlOLQAmBxpBxwqhGbnKIMfjO8) ||
+      !this.isSHA256(createUserDto.p9puf2LO9WZADiq7zdksASHER503pu1g)
     ) {
       throw new BadRequestException(
         'Les données envoyées ne sont pas au bon format',
       );
     }
 
-    const existingUser = await this.findByUsername(createUserDto.username);
+    const existingUser = await this.findByUsername(
+      createUserDto.p9puf2LO9WZADiq7zdksASHER503pu1g,
+    );
 
     if (existingUser) {
       return { message: 'Cet utilisateur existe déjà' };
     }
 
-    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
+    createUserDto.LzRJR6wYlOLQAmBxpBxwqhGbnKIMfjO8 = await bcrypt.hash(
+      createUserDto.LzRJR6wYlOLQAmBxpBxwqhGbnKIMfjO8,
+      10,
+    );
 
     const createdUser = new this.userModel(createUserDto);
     if (createdUser.save()) {
@@ -46,7 +51,9 @@ export class UserService {
       );
     }
 
-    return this.userModel.findOne({ username }).exec();
+    return this.userModel
+      .findOne({ p9puf2LO9WZADiq7zdksASHER503pu1g: username })
+      .exec();
   }
 
   private isSHA256(value: string): boolean {

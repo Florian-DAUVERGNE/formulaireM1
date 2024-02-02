@@ -15,6 +15,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
+  app.enableCors({ origin: 'https://localhost:3000' });
   app.use(helmet());
   await app.listen(3000);
 

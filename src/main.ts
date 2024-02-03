@@ -16,7 +16,17 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
   app.enableCors({ origin: 'https://localhost:3000' });
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", 'js/'],
+        },
+      },
+    }),
+  );
+
   await app.listen(3000);
 
   console.log(`Application is running on: https://localhost:3000`);

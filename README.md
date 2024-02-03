@@ -6,20 +6,12 @@ Formulaire de connexion sécurisé développé avec NestJS et Express.
 - [Configuration](#configuration)
 - [Utilisation](#utilisation)
 
+## Prérequis
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre système :
 
-## Pré-requis
-Pour installer et exécuter l'application localement, suivez ces étapes :
-
-1. Clonez le dépôt Git :
-   ```
-   git clone https://github.com/votre-nom-utilisateur/formulaireM1.git
-   
-   cd formulaireM1
-   ```
-2. Installez les dépendances du projet :
-   ```
-   npm install
-   ```
+- Node.js
+- npm
+- MongoDB
 
 ## Installation
 Pour installer et exécuter l'application localement, suivez ces étapes :
@@ -52,10 +44,3 @@ Avant de lancer l'application, assurez-vous de configurer correctement les param
     ```
     https://localhost:3000
     ```
-
-## Prérequis
-Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre système :
-
-- Node.js
-- npm
-- MongoDB

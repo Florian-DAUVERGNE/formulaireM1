@@ -1,5 +1,5 @@
 # formulaireM1
-Formulaire de connexion sécurisé développé avec NestJS et Express.
+Formulaire de connexion sécurisé développé avec NestJS.
 
 ## Table des matières
 - [Installation](#installation)
@@ -18,7 +18,7 @@ Pour installer et exécuter l'application localement, suivez ces étapes :
 
 1. Clonez le dépôt Git :
    ```
-   git clone https://github.com/votre-nom-utilisateur/formulaireM1.git
+   git clone git@github.com:Florian-DAUVERGNE/formulaireM1.git
    
    cd formulaireM1
    ```

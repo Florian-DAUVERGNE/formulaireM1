@@ -9,9 +9,9 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class LocalHostMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    const clientIp = req.ip || req.connection.remoteAddress;
+    const localHostIP = ['127.0.0.1', '::ffff:127.0.0.1', '::1'];
 
-    if (clientIp !== '127.0.0.1' && clientIp !== '::ffff:127.0.0.1') {
+    if (!localHostIP.includes(req.ip)) {
       throw new HttpException('Accès non autorisé', HttpStatus.UNAUTHORIZED);
     }
 
